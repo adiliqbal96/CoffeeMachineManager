@@ -14,7 +14,7 @@ namespace CoffeeMachineManager.Pages
 
         public void OnGet()
         {
-
+            // Any necessary initialization logic for the homepage
         }
     }
 }
