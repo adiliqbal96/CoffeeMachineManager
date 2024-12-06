@@ -1,20 +1,33 @@
 ﻿@page
 @model CoffeeMachineManager.Pages.CreateUserModel
 
-<h1>Create User</h1>
+@{
+    ViewData["Title"] = "Create User";
+}
 
-<form method="post">
-    <div>
-        <label for="Name">Name</label>
-        <input type="text" id="Name" name="NewUser.Name" />
-    </div>
-    <div>
-        <label for="Email">Email</label>
-        <input type="email" id="Email" name="NewUser.Email" />
-    </div>
-    <div>
-        <label for="Role">Role</label>
-        <input type="text" id="Role" name="NewUser.Role" />
-    </div>
-    <button type="submit">Create</button>
-</form>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Create User</h1>
+
+    <form method="post" class="w-50 mx-auto">
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" id="Name" name="NewUser.Name" class="form-control" placeholder="Enter full name" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" id="Email" name="NewUser.Email" class="form-control" placeholder="Enter email address" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Role" class="form-label">Role</label>
+            <select id="Role" name="NewUser.Role" class="form-select" required>
+                <option value="" selected disabled>Select a role</option>
+                <option value="Admin">Admin</option>
+                <option value="Employee">Employee</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Create</button>
+    </form>
+</div>
