@@ -24,7 +24,17 @@ namespace CoffeeMachineManager.Pages
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Please ensure all fields are correctly filled.");
                 return Page();
+            }
+
+            // Additional server-side validation (optional)
+            if (_context.Users.Any(u => u.Email == NewUser.Email))
+            {
+                ModelState.AddModelError("NewUser.Email", "This email is already registered.");
+                return Page();
+            }
 
             _context.Users.Add(NewUser);
             _context.SaveChanges();
