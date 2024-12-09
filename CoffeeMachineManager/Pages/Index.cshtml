@@ -1,32 +1,38 @@
 ﻿@page
 @model CoffeeMachineManager.Pages.IndexModel
 
-@{
-    ViewData["Title"] = "Coffee Machine Manager";
-}
+<div class="hero-section text-center py-5">
+    <img src="~/images/logo.png" alt="Coffee Machine Manager Logo" style="max-width: 100px;" />
+    <h1 class="mt-3">Coffee Machine Manager</h1>
+    <p class="lead">A seamless way to manage your coffee machines effectively.</p>
+    <a href="/User/ManageUsers" class="btn btn-warning btn-lg mt-3">Start Managing</a>
+</div>
 
-<div class="container text-center">
-    <h1 class="mt-4">Welcome to Coffee Machine Manager</h1>
-    <p class="lead mb-5">Effortlessly manage coffee machines and ensure seamless operation.</p>
-
-    <!-- Navigation Buttons -->
-    <div class="row mt-4">
+<div class="container my-5">
+    <div class="row text-center">
         <div class="col-md-4">
-            <a href="/User/ManageUsers" class="btn btn-primary btn-block">Manage Users</a>
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">User Management</h5>
+                    <p class="card-text">Easily add, edit, and remove users with just a few clicks.</p>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <a href="/User/Create" class="btn btn-secondary btn-block">Add New User</a>
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">Machine Overview</h5>
+                    <p class="card-text">Track and manage coffee machines from a single dashboard.</p>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <a href="/CoffeeMachines" class="btn btn-success btn-block">View Coffee Machines</a>
+            <div class="card border-warning">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">Reports & Feedback</h5>
+                    <p class="card-text">Generate reports and gather feedback to improve operations.</p>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <a href="/Feedback" class="btn btn-info btn-block">Feedback</a>
-        </div>
-        <div class="col-md-6">
-            <a href="/Reports" class="btn btn-warning btn-block">Reports & Logs</a>
-        </div>
-    </div>
+</div>
