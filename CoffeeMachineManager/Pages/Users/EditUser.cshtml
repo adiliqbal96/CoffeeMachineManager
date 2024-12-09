@@ -1,0 +1,27 @@
+﻿@page "{id:int}"
+@model CoffeeMachineManager.Pages.Users.EditUserModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h2>Edit User</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="User.Id" />
+    <div>
+        <label>Name</label>
+        <input asp-for="User.Name" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="User.Email" />
+    </div>
+    <div>
+        <label>Role</label>
+        <select asp-for="User.Role">
+            <option value="Admin">Admin</option>
+            <option value="Employee">Employee</option>
+        </select>
+    </div>
+    <button type="submit">Save</button>
+</form>

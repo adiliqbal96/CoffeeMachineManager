@@ -1,0 +1,44 @@
+﻿@page
+@model CoffeeMachineManager.Pages.Users.CreateUserModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h2>Create User</h2>
+
+<form method="post">
+    <div>
+        <label>Name</label>
+        <input asp-for="User.Name" class="form-control" />
+        <span asp-validation-for="User.Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="User.Email" type="email" class="form-control" />
+        <span asp-validation-for="User.Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Role</label>
+        <select asp-for="User.Role" class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="Employee">Employee</option>
+        </select>
+        <span asp-validation-for="User.Role" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            console.log('Form submitted');
+        });
+    </script>
+}
+}
