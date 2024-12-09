@@ -38,7 +38,7 @@ namespace CoffeeMachineManager.Pages
             _context.Users.Add(User);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index"); // Needs to redirects to confirm or failure page.
         }
     }
 }
