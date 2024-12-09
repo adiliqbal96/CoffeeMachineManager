@@ -2,19 +2,20 @@
 @model CoffeeMachineManager.Pages.IndexModel
 
 @{
-    ViewData["Title"] = "Coffee Machine Manager Beta";
+    ViewData["Title"] = "Coffee Machine Manager";
 }
 
 <div class="container text-center">
-    <h1>Welcome to Coffee Machine Manager</h1>
-    <p class="lead">Manage your coffee machines efficiently and keep everything running smoothly.</p>
+    <h1 class="mt-4">Welcome to Coffee Machine Manager</h1>
+    <p class="lead mb-5">Effortlessly manage coffee machines and ensure seamless operation.</p>
 
+    <!-- Navigation Buttons -->
     <div class="row mt-4">
         <div class="col-md-4">
             <a href="/Users" class="btn btn-primary btn-block">Manage Users</a>
         </div>
         <div class="col-md-4">
-            <a href="/CreateUser" class="btn btn-secondary btn-block">Add New User</a>
+            <a href="/User/Create" class="btn btn-secondary btn-block">Add New User</a>
         </div>
         <div class="col-md-4">
             <a href="/CoffeeMachines" class="btn btn-success btn-block">View Coffee Machines</a>
