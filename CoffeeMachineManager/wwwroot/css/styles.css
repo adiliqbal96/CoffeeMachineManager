@@ -1,8 +1,29 @@
-﻿.container {
-    margin-top: 50px;
+﻿.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.btn-block {
-    padding: 15px;
-    font-size: 1.2rem;
+.card-body {
+    padding: 2rem;
+    background-color: #ffffff;
 }
+
+.btn-primary {
+    background-color: #5C5300;
+    border-color: #5C5300;
+}
+
+    .btn-primary:hover {
+        background-color: #3E3A00;
+        border-color: #3E3A00;
+    }
+
+.btn-link {
+    color: #5C5300;
+    text-decoration: none;
+}
+
+    .btn-link:hover {
+        text-decoration: underline;
+    }
