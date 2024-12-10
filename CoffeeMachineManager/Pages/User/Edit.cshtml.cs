@@ -66,7 +66,7 @@ namespace CoffeeMachineManager.Pages
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
 
         private bool UserExists(int id)
