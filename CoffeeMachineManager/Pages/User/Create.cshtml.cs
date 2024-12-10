@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CoffeeMachineManager.Data;
 using CoffeeMachineManager.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CoffeeMachineManager.Pages
 {
