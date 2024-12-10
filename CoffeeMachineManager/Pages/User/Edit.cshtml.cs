@@ -14,10 +14,12 @@ namespace CoffeeMachineManager.Pages
     public class EditModel : PageModel
     {
         private readonly CoffeeMachineManager.Data.ApplicationDbContext _context;
+        private readonly CoffeeMachineManager.Interfaces.IPasswordHasher _passwordHasher;
 
-        public EditModel(CoffeeMachineManager.Data.ApplicationDbContext context)
+        public EditModel(CoffeeMachineManager.Data.ApplicationDbContext context, Interfaces.IPasswordHasher passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         [BindProperty]
@@ -49,6 +51,8 @@ namespace CoffeeMachineManager.Pages
             }
 
             _context.Attach(User).State = EntityState.Modified;
+
+            User.Password = _passwordHasher.GetHash(User.Password ?? throw new NullReferenceException("User password input is null!"));
 
             try
             {
