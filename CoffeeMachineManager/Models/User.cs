@@ -10,7 +10,7 @@ namespace CoffeeMachineManager.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
