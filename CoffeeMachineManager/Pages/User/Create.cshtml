@@ -1,35 +1,49 @@
 ﻿@page
 @model CreateModel
 
-<div class="container my-5">
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow border-warning">
-                <div class="card-header bg-warning text-white text-center">
-                    <h3>Create User</h3>
+        <div class="col-lg-6">
+            <div class="card shadow border-0">
+                <!-- Card Header -->
+                <div class="card-header text-center bg-warning text-white">
+                    <h2 class="mb-0">Create User</h2>
                 </div>
-                <div class="card-body">
+
+                <!-- Card Body -->
+                <div class="card-body p-4">
+                    <!-- Success or Error Messages -->
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
+
                     <form method="post">
-                        <!-- Validation Summary -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                        <!-- Email -->
+                        <!-- Email Input -->
                         <div class="mb-3">
-                            <label asp-for="User.Email" class="form-label">Email Address</label>
-                            <input asp-for="User.Email" class="form-control" placeholder="Enter email" />
+                            <label asp-for="User.Email" class="form-label fw-bold">Email Address</label>
+                            <input asp-for="User.Email" type="email" class="form-control" placeholder="Enter email" />
                             <span asp-validation-for="User.Email" class="text-danger"></span>
                         </div>
 
-                        <!-- Password -->
+                        <!-- Password Input -->
                         <div class="mb-3">
-                            <label asp-for="User.Password" class="form-label">Password</label>
+                            <label asp-for="User.Password" class="form-label fw-bold">Password</label>
                             <input asp-for="User.Password" type="password" class="form-control" placeholder="Enter password" />
                             <span asp-validation-for="User.Password" class="text-danger"></span>
                         </div>
 
-                        <!-- Role -->
+                        <!-- Role Dropdown -->
                         <div class="mb-3">
-                            <label asp-for="User.Role" class="form-label">Role</label>
+                            <label asp-for="User.Role" class="form-label fw-bold">Role</label>
                             <select asp-for="User.Role" class="form-select">
                                 <option value="" disabled selected>Select Role</option>
                                 <option value="Admin">Admin</option>
@@ -39,13 +53,15 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-warning px-4 py-2">Create</button>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-warning px-5 py-2 fw-bold">Create</button>
                         </div>
                     </form>
                 </div>
-                <div class="card-footer text-center">
-                    <a asp-page="ManageUsers" class="btn btn-link">Back to List</a>
+
+                <!-- Card Footer -->
+                <div class="card-footer text-center bg-light">
+                    <a asp-page="ManageUsers" class="btn btn-link text-warning fw-bold">Back to List</a>
                 </div>
             </div>
         </div>
