@@ -13,6 +13,12 @@ namespace CoffeeMachineManager.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<ConsumptionLog> ConsumptionLogs { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\mssqllocaldb;Database=CoffeeMachineManager;ConnectRetryCount=0");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

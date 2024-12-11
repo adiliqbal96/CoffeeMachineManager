@@ -27,9 +27,9 @@
             }
 
         .hero-section {
+            flex: 1;
             background-color: #f8f9fa;
             color: #343a40;
-            flex: 1; /* Ensures it takes available space */
             text-align: center;
             padding: 40px 0;
         }
@@ -38,7 +38,7 @@
             background-color: #5C5300;
             color: #ffffff;
             padding: 20px 0;
-            margin-top: auto; /* Pushes footer to the bottom */
+            margin-top: auto;
         }
 
         .footer-section {
@@ -47,6 +47,7 @@
     </style>
 </head>
 <body>
+    <!-- Navbar -->
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -68,10 +69,13 @@
         </nav>
     </header>
 
+    <!-- Main Content -->
     <div class="hero-section">
         @RenderBody()
+        @RenderSection("Scripts", required: false)
     </div>
 
+    <!-- Footer -->
     <footer class="text-white">
         <div class="container">
             <div class="row">
