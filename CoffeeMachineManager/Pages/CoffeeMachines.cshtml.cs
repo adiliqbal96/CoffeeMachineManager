@@ -4,7 +4,7 @@ using CoffeeMachineManager.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoffeeMachineManager.Pages
+namespace CoffeeMachineManager.Pages.CoffeeMachine
 {
     public class CoffeeMachinesModel : PageModel
     {
