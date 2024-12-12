@@ -1,38 +1,5 @@
 ﻿@page
 @model CoffeeMachineManager.Pages.CoffeeMachinesModel
 
-<h1>View Coffee Machines</h1>
-
-<div>
-    <h4>List of Coffee Machines</h4>
-    <hr />
-    @if (Model.CoffeeMachines.Any())
-    {
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Location</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var coffeeMachine in Model.CoffeeMachines)
-                {
-                    <tr>
-                        <td>@coffeeMachine.Location</td>
-                        <td>@coffeeMachine.Type</td>
-                        <td>@coffeeMachine.Status</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p>No coffee machines available.</p>
-    }
-</div>
-<div>
-    <a asp-page="/Index" class="btn btn-secondary">Back to Home</a>
-</div>
+<h1>Coffee Machines</h1>
+<p>Here you can manage and view all coffee machines.</p>
