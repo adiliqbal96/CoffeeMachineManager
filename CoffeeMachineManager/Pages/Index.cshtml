@@ -3,36 +3,47 @@
 
 <div class="hero-section text-center py-5">
     <img src="~/images/logo.png" alt="Coffee Machine Manager Logo" style="max-width: 100px;" />
-    <h1 class="mt-3">Coffee Machine Manager</h1>
+    <h1 class="mt-3">Zealand Coffee Machine Manager</h1>
     <p class="lead">A seamless way to manage your coffee machines effectively.</p>
     <a href="/User/ManageUsers" class="btn btn-warning btn-lg mt-3">Start Managing</a>
 </div>
 
 <div class="container my-5">
     <div class="row text-center">
+        <!-- User Management -->
         <div class="col-md-4">
-            <div class="card border-warning">
-                <div class="card-body">
-                    <h5 class="card-title text-warning">User Management</h5>
-                    <p class="card-text">Easily add, edit, and remove users with just a few clicks.</p>
+            <a href="/User/ManageUsers" class="text-decoration-none">
+                <div class="card border-warning shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">User Management</h5>
+                        <p class="card-text">Easily add, edit, and remove users with just a few clicks.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
+
+        <!-- Machine Overview -->
         <div class="col-md-4">
-            <div class="card border-warning">
-                <div class="card-body">
-                    <h5 class="card-title text-warning">Machine Overview</h5>
-                    <p class="card-text">Track and manage coffee machines from a single dashboard.</p>
+            <a href="/CoffeeMachines/Index" class="text-decoration-none">
+                <div class="card border-warning shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Machine Overview</h5>
+                        <p class="card-text">Track and manage coffee machines from a single dashboard.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
+
+        <!-- Reports & Feedback -->
         <div class="col-md-4">
-            <div class="card border-warning">
-                <div class="card-body">
-                    <h5 class="card-title text-warning">Reports & Feedback</h5>
-                    <p class="card-text">Generate reports and gather feedback to improve operations.</p>
+            <a href="/Reports/Index" class="text-decoration-none">
+                <div class="card border-warning shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-warning">Reports & Feedback</h5>
+                        <p class="card-text">Generate reports and gather feedback to improve operations.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
