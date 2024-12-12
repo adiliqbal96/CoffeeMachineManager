@@ -15,10 +15,12 @@ namespace CoffeeMachineManager.Pages
             _context = context;
         }
 
+        // List of Coffee Machines to display
         public List<CoffeeMachine> CoffeeMachines { get; set; } = new List<CoffeeMachine>();
 
         public void OnGet()
         {
+            // Fetch all coffee machines from the database
             CoffeeMachines = _context.CoffeeMachines.ToList();
         }
     }
