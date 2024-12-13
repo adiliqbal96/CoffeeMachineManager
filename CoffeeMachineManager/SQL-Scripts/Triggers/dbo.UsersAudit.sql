@@ -9,7 +9,7 @@ AS
 IF (ROWCOUNT_BIG() = 0)
 RETURN;
 BEGIN
-	INSERT INTO TR_Users_Audit
+	INSERT INTO UsersAudit
 	(Id, Email, Password, Role, UpdatedBy, UpdatedOn)
 	SELECT i.Id, i.Email, i.Password, i.Role, SUSER_SNAME(), getdate()
 	FROM dbo.Users t
