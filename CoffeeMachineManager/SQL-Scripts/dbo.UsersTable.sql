@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[Users]
+﻿USE CoffeeMachineManager;
+
+CREATE TABLE [dbo].[Users]
 (
 	[Id] INT IDENTITY PRIMARY KEY,
 	[Email] NVARCHAR(320) NOT NULL,
