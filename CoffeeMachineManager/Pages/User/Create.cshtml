@@ -2,52 +2,63 @@
 @model CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create User";
 }
 
-<h1>Create</h1>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg" style="width: 400px;">
+        <div class="card-header bg-warning text-center text-white">
+            <h3 class="mb-0">Create User</h3>
+        </div>
+        <div class="card-body">
+            @* Display success message if user creation was successful *@
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success text-center">
+                    @TempData["Message"]
+                </div>
+            }
 
-<h4>User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Password" class="control-label"></label>
-                <input asp-for="User.Password" class="form-control" />
-                <span asp-validation-for="User.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="User.Role" class="control-label"></label>
-                <select asp-for="User.Role" class="form-control">
-                    <option value="">Select Role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Employee">Employee</option>
-                </select>
-                <span asp-validation-for="User.Role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <form method="post">
+                @* Show validation errors at the top of the form *@
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="User.Email" class="form-label">Email Address</label>
+                    <input asp-for="User.Email" class="form-control" placeholder="Enter email" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="User.Password" class="form-label">Password</label>
+                    <input asp-for="User.Password" type="password" class="form-control" placeholder="Enter password" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="User.Role" class="form-label">Role</label>
+                    <select asp-for="User.Role" class="form-select">
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Employee">Employee</option>
+                    </select>
+                    <span asp-validation-for="User.Role" class="text-danger"></span>
+                </div>
+
+                @* Submit button *@
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning px-4">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            @* Link to navigate back to the homepage *@
+            <a asp-page="/Index" class="btn btn-link text-decoration-none">Back to List</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
+@* This is client-side validation *@
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

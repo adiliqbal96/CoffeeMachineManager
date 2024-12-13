@@ -1,10 +1,15 @@
 using CoffeeMachineManager.Data;
+using CoffeeMachineManager.Interfaces;
+using CoffeeMachineManager.PasswordHashing;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+// Register service for DI.
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 // Register the ApplicationDbContext with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

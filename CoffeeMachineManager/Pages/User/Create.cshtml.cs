@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CoffeeMachineManager.Data;
 using CoffeeMachineManager.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CoffeeMachineManager.Pages
 {
     public class CreateModel : PageModel
     {
         private readonly CoffeeMachineManager.Data.ApplicationDbContext _context;
+        private readonly CoffeeMachineManager.Interfaces.IPasswordHasher _passwordHasher;
 
-        public CreateModel(CoffeeMachineManager.Data.ApplicationDbContext context)
+        public CreateModel(CoffeeMachineManager.Data.ApplicationDbContext context, Interfaces.IPasswordHasher passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         public IActionResult OnGet()
@@ -34,6 +37,8 @@ namespace CoffeeMachineManager.Pages
             {
                 return Page();
             }
+
+            User.Password = _passwordHasher.GetHash(User.Password ?? throw new NullReferenceException("User password input is null!"));
 
             _context.Users.Add(User);
             await _context.SaveChangesAsync();
