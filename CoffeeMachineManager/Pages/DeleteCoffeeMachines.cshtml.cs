@@ -5,11 +5,11 @@ using CoffeeMachineManager.Models;
 
 namespace CoffeeMachineManager.Pages
 {
-    public class EditCoffeeMachineModel : PageModel
+    public class DeleteCoffeeMachinesModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public EditCoffeeMachineModel(ApplicationDbContext context)
+        public DeleteCoffeeMachinesModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -20,33 +20,27 @@ namespace CoffeeMachineManager.Pages
         public IActionResult OnGet(int id)
         {
             CoffeeMachine = _context.CoffeeMachines.FirstOrDefault(m => m.Id == id);
+
             if (CoffeeMachine == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var coffeeMachine = _context.CoffeeMachines.FirstOrDefault(m => m.Id == id);
 
-            var coffeeMachineToUpdate = _context.CoffeeMachines.FirstOrDefault(m => m.Id == CoffeeMachine.Id);
-            if (coffeeMachineToUpdate == null)
+            if (coffeeMachine == null)
             {
                 return NotFound();
             }
 
-            coffeeMachineToUpdate.Location = CoffeeMachine.Location;
-            coffeeMachineToUpdate.Type = CoffeeMachine.Type;
-            coffeeMachineToUpdate.Status = CoffeeMachine.Status;
-
+            _context.CoffeeMachines.Remove(coffeeMachine);
             _context.SaveChanges();
 
-            TempData["Message"] = "Coffee machine updated successfully!";
             return RedirectToPage("CoffeeMachines");
         }
     }

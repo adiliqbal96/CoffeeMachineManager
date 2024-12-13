@@ -1,5 +1,5 @@
 ﻿@page "{id:int}"
-@model EditCoffeeMachineModel
+@model EditCoffeeMachinesModel
 
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-lg" style="width: 30rem;">
@@ -12,13 +12,13 @@
 
                 <div class="mb-3">
                     <label asp-for="CoffeeMachine.Location" class="form-label">Location</label>
-                    <input asp-for="CoffeeMachine.Location" class="form-control" placeholder="Enter location" />
+                    <input asp-for="CoffeeMachine.Location" class="form-control" />
                     <span asp-validation-for="CoffeeMachine.Location" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="CoffeeMachine.Type" class="form-label">Type</label>
-                    <input asp-for="CoffeeMachine.Type" class="form-control" placeholder="Enter type" />
+                    <input asp-for="CoffeeMachine.Type" class="form-control" />
                     <span asp-validation-for="CoffeeMachine.Type" class="text-danger"></span>
                 </div>
 
@@ -27,6 +27,8 @@
                     <select asp-for="CoffeeMachine.Status" class="form-select">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                        <option value="Out of Service">Out of Service</option>
                     </select>
                     <span asp-validation-for="CoffeeMachine.Status" class="text-danger"></span>
                 </div>
@@ -35,9 +37,6 @@
                     <button type="submit" class="btn btn-warning px-5">Save Changes</button>
                 </div>
             </form>
-        </div>
-        <div class="card-footer text-center">
-            <a asp-page="CoffeeMachines" class="btn btn-link">Back to List</a>
         </div>
     </div>
 </div>
