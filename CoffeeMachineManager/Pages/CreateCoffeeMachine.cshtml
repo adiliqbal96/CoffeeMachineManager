@@ -10,23 +10,40 @@
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
+                <!-- Dropdown for Location -->
                 <div class="mb-3">
                     <label asp-for="CoffeeMachine.Location" class="form-label">Location</label>
-                    <input asp-for="CoffeeMachine.Location" class="form-control" placeholder="Enter location" />
+                    <select asp-for="CoffeeMachine.Location" class="form-select">
+                        <option value="" disabled selected>Select location</option>
+                        @foreach (var location in Model.Locations)
+                        {
+                            <option value="@location">@location</option>
+                        }
+                    </select>
                     <span asp-validation-for="CoffeeMachine.Location" class="text-danger"></span>
                 </div>
 
+                <!-- Dropdown for Type -->
                 <div class="mb-3">
                     <label asp-for="CoffeeMachine.Type" class="form-label">Type</label>
-                    <input asp-for="CoffeeMachine.Type" class="form-control" placeholder="Enter type" />
+                    <select asp-for="CoffeeMachine.Type" class="form-select">
+                        <option value="" disabled selected>Select type</option>
+                        @foreach (var type in Model.Types)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
                     <span asp-validation-for="CoffeeMachine.Type" class="text-danger"></span>
                 </div>
 
+                <!-- Dropdown for Status -->
                 <div class="mb-3">
                     <label asp-for="CoffeeMachine.Status" class="form-label">Status</label>
                     <select asp-for="CoffeeMachine.Status" class="form-select">
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                        <option value="Out of Service">Out of Service</option>
                     </select>
                     <span asp-validation-for="CoffeeMachine.Status" class="text-danger"></span>
                 </div>
