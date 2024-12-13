@@ -29,6 +29,9 @@ namespace CoffeeMachineManager.Data
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
+            modelBuilder.Entity<CoffeeMachine>()
+                .ToTable(tb => tb.HasTrigger("TR_CoffeeMachines_Audit"));
+
             // Feedback -> CoffeeMachine relationship
             modelBuilder.Entity<Feedback>()
                 .HasOne(f => f.CoffeeMachine)
