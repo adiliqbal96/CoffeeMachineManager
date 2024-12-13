@@ -19,7 +19,7 @@
                 <tbody>
                     @if (Model.CoffeeMachines.Any())
                     {
-                        @foreach (var machine in Model.CoffeeMachines)
+                        foreach (var machine in Model.CoffeeMachines)
                         {
                             <tr>
                                 <td>@machine.Location</td>
