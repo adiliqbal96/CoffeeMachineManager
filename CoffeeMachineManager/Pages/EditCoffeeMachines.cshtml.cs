@@ -17,8 +17,14 @@ namespace CoffeeMachineManager.Pages
         [BindProperty]
         public CoffeeMachine CoffeeMachine { get; set; }
 
-        public IActionResult OnGet(int id)
+        // Handle GET request to populate the form
+        public IActionResult OnGet(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             CoffeeMachine = _context.CoffeeMachines.FirstOrDefault(m => m.Id == id);
 
             if (CoffeeMachine == null)
@@ -29,6 +35,7 @@ namespace CoffeeMachineManager.Pages
             return Page();
         }
 
+        // Handle POST request to save changes
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -48,7 +55,7 @@ namespace CoffeeMachineManager.Pages
 
             _context.SaveChanges();
 
-            return RedirectToPage("CoffeeMachines");
+            return RedirectToPage("/CoffeeMachines");
         }
     }
 }
