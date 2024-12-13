@@ -25,6 +25,7 @@ namespace CoffeeMachineManager.Data
 
             // Ensure unique emails in the Users table
             modelBuilder.Entity<User>()
+                .ToTable(tb => tb.HasTrigger("TR_Users_Audit")) // EF has to know about triggers otherwise it breaks.
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
