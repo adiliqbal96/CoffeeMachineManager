@@ -1,0 +1,12 @@
+﻿USE CoffeeMachineManager;
+
+CREATE TABLE [dbo].[UsersAudit]
+(
+	[AuditID] INT IDENTITY PRIMARY KEY,
+	[Id] INT FOREIGN KEY REFERENCES Users(Id),
+	[Email] NVARCHAR(320) NOT NULL,
+	[Password] NCHAR(64) NOT NULL,
+	[Role] NVARCHAR(20) NOT NULL,
+	[UpdatedBy] NVARCHAR(128) NOT NULL,
+	[UpdatedOn] DATETIME NOT NULL
+)

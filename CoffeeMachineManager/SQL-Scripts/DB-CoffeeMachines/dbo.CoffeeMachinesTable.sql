@@ -1,4 +1,6 @@
-﻿CREATE TABLE [dbo].[CoffeeMachines]
+﻿USE CoffeeMachineManager;
+
+CREATE TABLE [dbo].[CoffeeMachines]
 (
     [Id] INT IDENTITY PRIMARY KEY,              -- Primary key with identity increment
     [Location] NVARCHAR(255) NOT NULL,          -- Location of the coffee machine
