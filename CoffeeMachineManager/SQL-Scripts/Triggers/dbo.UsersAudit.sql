@@ -3,7 +3,7 @@ GO
 
 -- Code mainly used from: https://www.mssqltips.com/sqlservertip/4055/create-a-simple-sql-server-trigger-to-build-an-audit-trail/
 
-CREATE TRIGGER Users_Audit ON dbo.Users
+CREATE TRIGGER TR_Users_Audit ON dbo.Users
 AFTER UPDATE, INSERT, DELETE
 AS  
 IF (ROWCOUNT_BIG() = 0)
