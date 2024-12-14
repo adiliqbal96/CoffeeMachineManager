@@ -16,7 +16,7 @@ namespace CoffeeMachineManager.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-               @"Server=(localdb)\mssqllocaldb;Database=CoffeeMachineManager;ConnectRetryCount=0");
+               @"Server=(localdb)\MSSQLLocalDB;Database=CoffeeMachineManager;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,8 +25,12 @@ namespace CoffeeMachineManager.Data
 
             // Ensure unique emails in the Users table
             modelBuilder.Entity<User>()
+                .ToTable(tb => tb.HasTrigger("TR_Users_Audit")) // EF has to know about triggers otherwise it breaks.
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            modelBuilder.Entity<CoffeeMachine>()
+                .ToTable(tb => tb.HasTrigger("TR_CoffeeMachines_Audit"));
 
             // Feedback -> CoffeeMachine relationship
             modelBuilder.Entity<Feedback>()
