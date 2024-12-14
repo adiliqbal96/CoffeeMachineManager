@@ -1,0 +1,7 @@
+CREATE TABLE ConsumptionLogs (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    CoffeeMachineId INT NOT NULL,
+    CoffeeUsed INT NOT NULL,
+    Timestamp DATETIME NOT NULL DEFAULT GETUTCDATE(),
+    FOREIGN KEY (CoffeeMachineId) REFERENCES CoffeeMachines(Id) ON DELETE CASCADE
+);
