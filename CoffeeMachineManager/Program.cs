@@ -3,8 +3,6 @@ using CoffeeMachineManager.Data;
 using CoffeeMachineManager.Interfaces;
 using CoffeeMachineManager.PasswordHashing;
 using Microsoft.EntityFrameworkCore;
-using CoffeeMachineManager.Interfaces;
-using CoffeeMachineManager.PasswordHashing;
 
 var builder = WebApplication.CreateBuilder(args);
 
