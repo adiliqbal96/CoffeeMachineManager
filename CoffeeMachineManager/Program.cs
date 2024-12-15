@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CoffeeMachineManager.Data;
 using Microsoft.EntityFrameworkCore;
+using CoffeeMachineManager.Interfaces;
+using CoffeeMachineManager.PasswordHashing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Login"; // Redirect to Login page for unauthenticated users
         options.AccessDeniedPath = "/AccessDenied"; // Redirect for unauthorized users
     });
+
+// Register service for DI.
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 // Register the DbContext with SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
