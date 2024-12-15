@@ -35,10 +35,21 @@ namespace CoffeeMachineManager.Pages
                 return Page();
             }
 
+            // Set session variables
             HttpContext.Session.SetString("UserRole", user.Role);
             HttpContext.Session.SetString("UserEmail", user.Email);
 
-            return RedirectToPage("/Index");
+            // Redirect based on role
+            if (user.Role == "Admin")
+            {
+                return RedirectToPage("/Index"); // Admin Dashboard
+            }
+            else if (user.Role == "Employee")
+            {
+                return RedirectToPage("/CoffeeMachines"); // Employee Dashboard
+            }
+
+            return RedirectToPage("/Login"); // Default fallback
         }
     }
 }
