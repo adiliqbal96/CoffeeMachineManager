@@ -41,6 +41,7 @@ namespace CoffeeMachineManager.Data
 
             // ConsumptionLog -> CoffeeMachine relationship
             modelBuilder.Entity<ConsumptionLog>()
+                .ToTable(tb => tb.HasTrigger("TR_ConsumptionLogs_Audit"))
                 .HasOne(c => c.CoffeeMachine)
                 .WithMany()
                 .HasForeignKey(c => c.CoffeeMachineId)

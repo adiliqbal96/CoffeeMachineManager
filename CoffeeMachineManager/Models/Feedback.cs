@@ -16,7 +16,7 @@ namespace CoffeeMachineManager.Models
         [Required]
         public string FeedbackText { get; set; }
 
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         [StringLength(50)]
         public string Status { get; set; } = "Pending"; // Default: "Pending"

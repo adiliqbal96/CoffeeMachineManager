@@ -1,7 +1,13 @@
-CREATE TABLE ConsumptionLogs (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-    CoffeeMachineId INT NOT NULL,
-    CoffeeUsed INT NOT NULL,
-    Timestamp DATETIME NOT NULL DEFAULT GETUTCDATE(),
-    FOREIGN KEY (CoffeeMachineId) REFERENCES CoffeeMachines(Id) ON DELETE CASCADE
+USE CoffeeMachineManager;
+
+DROP TABLE IF EXISTS [dbo].[ConsumptionLogs] -- Only for testing.
+
+CREATE TABLE [dbo].[ConsumptionLogs]
+(
+    [Id] INT PRIMARY KEY IDENTITY,
+    [CoffeeMachineId] INT FOREIGN KEY
+        REFERENCES CoffeeMachines(Id)
+        ON DELETE CASCADE NOT NULL,
+    [CoffeeUsed] INT NOT NULL,
+    [CreatedOn] DATETIME NOT NULL DEFAULT GETUTCDATE()
 );

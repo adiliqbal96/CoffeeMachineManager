@@ -3,7 +3,10 @@ GO
 
 -- Code mainly used from: https://www.mssqltips.com/sqlservertip/4055/create-a-simple-sql-server-trigger-to-build-an-audit-trail/
 
-CREATE TRIGGER TR_Users_Audit ON dbo.Users
+DROP TRIGGER IF EXISTS TR_ConsumptionLogs_Audit -- Only for testing.
+GO
+
+CREATE TRIGGER TR_ConsumptionLogs_Audit ON dbo.ConsumptionLogs
 FOR UPDATE, INSERT, DELETE
 AS
 IF (ROWCOUNT_BIG() = 0)
@@ -20,9 +23,9 @@ BEGIN
     ELSE 
         NULL -- Unknown operation.
     END;
-	INSERT INTO UsersAudit
-	(Id, Email, Password, Role, UpdatedBy, UpdatedOn, ActionType)
-	SELECT i.Id, i.Email, i.Password, i.Role, SUSER_SNAME(), getdate(), @Operation
-	FROM dbo.Users t
+	INSERT INTO ConsumptionLogsAudit
+	(CoffeeMachineId, CoffeeUsed, UpdatedBy, UpdatedOn, ActionType)
+	SELECT i.CoffeeMachineId, i.CoffeeUsed, SUSER_SNAME(), GETUTCDATE(), @Operation
+	FROM dbo.ConsumptionLogs t
 	inner join inserted i on t.Id = i.Id
 END;
