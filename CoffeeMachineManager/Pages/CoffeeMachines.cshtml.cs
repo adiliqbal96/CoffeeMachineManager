@@ -4,9 +4,12 @@ using CoffeeMachineManager.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace CoffeeMachineManager.Pages
 {
+    [Authorize]
     public class CoffeeMachinesModel : PageModel
     {
         private readonly ApplicationDbContext _context;
