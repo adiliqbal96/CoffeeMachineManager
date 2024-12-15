@@ -22,7 +22,7 @@ BEGIN
     END;
 	INSERT INTO CoffeeMachinesAudit
 	(Id, Location, Type, Status, UpdatedBy, UpdatedOn, ActionType)
-	SELECT i.Id, i.Location, i.Type, i.Status, SUSER_SNAME(), getdate(), @Operation
+	SELECT i.Id, i.Location, i.Type, i.Status, SUSER_SNAME(), GETUTCDATE(), @Operation
 	FROM dbo.CoffeeMachines t
 	inner join inserted i on t.Id = i.Id
 END;
