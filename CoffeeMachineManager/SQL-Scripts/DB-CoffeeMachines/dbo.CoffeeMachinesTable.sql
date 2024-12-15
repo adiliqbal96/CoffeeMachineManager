@@ -1,4 +1,8 @@
-﻿CREATE TABLE [dbo].[CoffeeMachines]
+﻿USE CoffeeMachineManager;
+
+DROP TABLE IF EXISTS [dbo].[CoffeeMachines] -- Only for testing.
+
+CREATE TABLE [dbo].[CoffeeMachines]
 (
     [Id] INT IDENTITY PRIMARY KEY,              -- Primary key with identity increment
     [Location] NVARCHAR(255) NOT NULL,          -- Location of the coffee machine
