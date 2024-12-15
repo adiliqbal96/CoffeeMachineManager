@@ -15,7 +15,6 @@ GRANT INSERT ON CoffeeMachines TO dbfacilitator;
 GRANT DELETE ON CoffeeMachines TO dbfacilitator;
 
 GRANT SELECT ON ConsumptionLogs TO dbfacilitator;
-GRANT EXECUTE ON ConsumptionLogs TO dbfacilitator;
 GRANT INSERT ON ConsumptionLogs TO dbfacilitator;
 GRANT UPDATE ON ConsumptionLogs TO dbfacilitator;
 
