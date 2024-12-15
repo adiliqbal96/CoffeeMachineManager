@@ -39,6 +39,8 @@ namespace CoffeeMachineManager.Pages
             }
 
             User.Password = _passwordHasher.GetHash(User.Password ?? throw new NullReferenceException("User password input is null!"));
+            Console.WriteLine($"User's hash is: {User.Password} | Length: {User.Password.Length}");
+            //TempData["Message"] = $"User's hash is: {User.Password}";
 
             _context.Users.Add(User);
             await _context.SaveChangesAsync();
