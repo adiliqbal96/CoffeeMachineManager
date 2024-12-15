@@ -1,5 +1,7 @@
 ﻿USE CoffeeMachineManager;
 
+DROP TABLE IF EXISTS [dbo].[Users] -- Only for testing.
+
 CREATE TABLE [dbo].[Users]
 (
 	[Id] INT IDENTITY PRIMARY KEY,

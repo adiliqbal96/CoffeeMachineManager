@@ -1,5 +1,7 @@
 USE CoffeeMachineManager;
 
+DROP TABLE IF EXISTS [dbo].[ConsumptionLogs] -- Only for testing.
+
 CREATE TABLE [dbo].[ConsumptionLogs]
 (
     [Id] INT PRIMARY KEY IDENTITY,

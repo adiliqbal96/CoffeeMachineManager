@@ -3,8 +3,11 @@ GO
 
 -- Code mainly used from: https://www.mssqltips.com/sqlservertip/4055/create-a-simple-sql-server-trigger-to-build-an-audit-trail/
 
-CREATE TRIGGER TR_CoffeeMachines_Audit ON dbo.CoffeeMachines
-FOR UPDATE, INSERT, DELETE
+DROP TRIGGER IF EXISTS TR_Users_Password_Hash -- Only for testing.
+GO
+
+CREATE TRIGGER TR_Users_Password_Hash ON dbo.Users
+FOR UPDATE, INSERT
 AS
 IF (ROWCOUNT_BIG() = 0)
 RETURN;
@@ -20,9 +23,9 @@ BEGIN
     ELSE 
         NULL -- Unknown operation.
     END;
-	INSERT INTO CoffeeMachinesAudit
-	(Id, Location, Type, Status, UpdatedBy, UpdatedOn, ActionType)
-	SELECT i.Id, i.Location, i.Type, i.Status, SUSER_SNAME(), GETUTCDATE(), @Operation
-	FROM dbo.CoffeeMachines t
+	INSERT INTO UsersAudit
+	(Id, Email, Password, Role, UpdatedBy, UpdatedOn, ActionType)
+	SELECT i.Id, i.Email, i.Password, i.Role, SUSER_SNAME(), GETUTCDATE(), @Operation
+	FROM dbo.Users t
 	inner join inserted i on t.Id = i.Id
 END;

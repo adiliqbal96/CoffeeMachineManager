@@ -3,6 +3,9 @@ GO
 
 -- Code mainly used from: https://www.mssqltips.com/sqlservertip/4055/create-a-simple-sql-server-trigger-to-build-an-audit-trail/
 
+DROP TRIGGER IF EXISTS TR_ConsumptionLogs_Audit -- Only for testing.
+GO
+
 CREATE TRIGGER TR_ConsumptionLogs_Audit ON dbo.ConsumptionLogs
 FOR UPDATE, INSERT, DELETE
 AS
