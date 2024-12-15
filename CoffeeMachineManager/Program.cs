@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CoffeeMachineManager.Data;
+using CoffeeMachineManager.Interfaces;
+using CoffeeMachineManager.PasswordHashing;
 using Microsoft.EntityFrameworkCore;
 using CoffeeMachineManager.Interfaces;
 using CoffeeMachineManager.PasswordHashing;

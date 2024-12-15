@@ -19,15 +19,15 @@
                 <tbody>
                     @if (Model.CoffeeMachines.Any())
                     {
-                        @foreach (var machine in Model.CoffeeMachines)
+                        foreach (var machine in Model.CoffeeMachines)
                         {
                             <tr>
                                 <td>@machine.Location</td>
                                 <td>@machine.Type</td>
                                 <td>@machine.Status</td>
                                 <td>
-                                    <a asp-page="EditCoffeeMachine" asp-route-id="@machine.Id" class="btn btn-sm btn-warning">Edit</a>
-                                    <a asp-page="DeleteCoffeeMachine" asp-route-id="@machine.Id" class="btn btn-sm btn-danger">Delete</a>
+                                    <a asp-page="/EditCoffeeMachines" asp-route-id="@machine.Id" class="btn btn-sm btn-warning">Edit</a>
+                                    <a asp-page="/DeleteCoffeeMachines" asp-route-id="@machine.Id" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         }
@@ -46,7 +46,7 @@
     <!-- Add Coffee Machine -->
     <div class="row mt-4">
         <div class="col-md-12 text-center">
-            <a asp-page="CreateCoffeeMachine" class="btn btn-warning px-4">Add Coffee Machine</a>
+            <a asp-page="/CreateCoffeeMachine" class="btn btn-warning px-4">Add Coffee Machine</a>
         </div>
     </div>
 

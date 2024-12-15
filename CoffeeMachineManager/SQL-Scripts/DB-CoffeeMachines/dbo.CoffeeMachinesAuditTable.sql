@@ -1,5 +1,7 @@
 ﻿USE CoffeeMachineManager;
 
+DROP TABLE IF EXISTS [dbo].[CoffeeMachinesAudit] -- Only for testing.
+
 CREATE TABLE [dbo].[CoffeeMachinesAudit]
 (
     [AuditId] INT IDENTITY PRIMARY KEY,         -- Primary key with identity increment
