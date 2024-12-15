@@ -7,5 +7,5 @@ CREATE TABLE [dbo].[ConsumptionLogs]
         REFERENCES CoffeeMachines(Id)
         ON DELETE CASCADE NOT NULL,
     [CoffeeUsed] INT NOT NULL,
-    [Timestamp] DATETIME NOT NULL DEFAULT GETUTCDATE()
+    [CreatedOn] DATETIME NOT NULL DEFAULT GETUTCDATE()
 );

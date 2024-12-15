@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[ConsumptionLogsAudit]
     [CoffeeMachineId] INT FOREIGN KEY
         REFERENCES CoffeeMachines(Id) NULL,
     [CoffeeUsed] INT NOT NULL,
-    [Timestamp] DATETIME NOT NULL DEFAULT GETUTCDATE(),
+    [CreatedOn] DATETIME NOT NULL DEFAULT GETUTCDATE(),
     [UpdatedBy] NVARCHAR(128) NOT NULL,
 	[UpdatedOn] DATETIME NOT NULL,
 	[ActionType] NVARCHAR(6) NULL

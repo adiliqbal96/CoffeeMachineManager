@@ -40,9 +40,9 @@ namespace CoffeeMachineManager.Pages
                         Type = log.CoffeeMachine.Type
                     },
                     CoffeeUsed = log.CoffeeUsed,
-                    Timestamp = log.Timestamp
+                    CreatedOn = log.CreatedOn
                 })
-                .OrderByDescending(log => log.Timestamp)
+                .OrderByDescending(log => log.CreatedOn)
                 .ToList();
 
             // Fetch all coffee machines for the dropdown
@@ -63,7 +63,7 @@ namespace CoffeeMachineManager.Pages
             {
                 CoffeeMachineId = CoffeeMachineId,
                 CoffeeUsed = CoffeeUsed,
-                Timestamp = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow
             };
 
             // Save the log to the database
