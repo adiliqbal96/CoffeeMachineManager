@@ -78,8 +78,10 @@
                             @if (!string.IsNullOrEmpty(Context.Session.GetString("UserRole")))
                             {
                                 <li class="nav-item">
-                                    <form method="post" action="/Logout">
-                                        <button type="submit" class="btn btn-link nav-link" style="text-decoration: none;">Logout</button>
+                                    <form method="post" asp-page="/Logout" style="display: inline;">
+                                        <button type="submit" class="btn btn-link nav-link" style="text-decoration: none; color: #ffffff;">
+                                            Logout
+                                        </button>
                                     </form>
                                 </li>
                             }
