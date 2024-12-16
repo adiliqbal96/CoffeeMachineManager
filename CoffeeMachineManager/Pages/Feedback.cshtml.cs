@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMachineManager.Pages
 {
-    [Authorize]
+    
     public class FeedbackModel : PageModel
     {
         public void OnGet()
