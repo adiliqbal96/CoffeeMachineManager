@@ -47,27 +47,50 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="/">CoffeeMachineManager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/User/Create">Create User</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Feedback">Feedback</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
-                    </ul>
+    <!-- Navbar: Hidden on the Login Page -->
+    @if (!Context.Request.Path.Value.Contains("Login", StringComparison.OrdinalIgnoreCase))
+    {
+        <header>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="/">CoffeeMachineManager</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            @if (Context.Session.GetString("UserRole") == "Admin")
+                            {
+                                <!-- Admin sees all options -->
+                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Feedback">Feedback</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
+                            }
+                            else if (Context.Session.GetString("UserRole") == "Employee")
+                            {
+                                <!-- Employees see restricted options -->
+                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Feedback">Feedback</a></li>
+                            }
+
+                            <!-- Logout Button -->
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("UserRole")))
+                            {
+                                <li class="nav-item">
+                                    <form method="post" asp-page="/Logout" style="display: inline;">
+                                        <button type="submit" class="btn btn-link nav-link" style="text-decoration: none; color: #ffffff;">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+    }
 
     <!-- Main Content -->
     <div class="hero-section">

@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using CoffeeMachineManager.Data;
 using CoffeeMachineManager.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoffeeMachineManager.Pages
 {
+    
     public class CreateCoffeeMachineModel : PageModel
     {
         private readonly ApplicationDbContext _context;
