@@ -9,14 +9,14 @@ namespace CoffeeMachineManager.Pages
         {
             // Clear session and redirect to login
             HttpContext.Session.Clear();
-            return RedirectToPage("/Login");
+            return RedirectToPage("/Index");
         }
 
         public IActionResult OnPost()
         {
             // Clear session and redirect to login
             HttpContext.Session.Clear();
-            return RedirectToPage("/Login");
+            return RedirectToPage("/Index");
         }
     }
 }
