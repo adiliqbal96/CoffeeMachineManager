@@ -62,6 +62,7 @@
                             @if (Context.Session.GetString("UserRole") == "Admin")
                             {
                                 <!-- Admin sees all options -->
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                                 <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
@@ -69,6 +70,7 @@
                             else if (Context.Session.GetString("UserRole") == "Employee")
                             {
                                 <!-- Employees see restricted options -->
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                                 <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
                             }
