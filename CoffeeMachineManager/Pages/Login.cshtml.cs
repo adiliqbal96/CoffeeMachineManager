@@ -14,10 +14,8 @@ namespace CoffeeMachineManager.Pages
             _context = context;
         }
 
-        [BindProperty]
-        public string Email { get; set; }
-        [BindProperty]
-        public string Password { get; set; }
+        [BindProperty] public string Email { get; set; }
+        [BindProperty] public string Password { get; set; }
 
         public IActionResult OnPost()
         {
@@ -35,21 +33,10 @@ namespace CoffeeMachineManager.Pages
                 return Page();
             }
 
-            // Set session variables
             HttpContext.Session.SetString("UserRole", user.Role);
             HttpContext.Session.SetString("UserEmail", user.Email);
 
-            // Redirect based on role
-            if (user.Role == "Admin")
-            {
-                return RedirectToPage("/User/ManageUsers"); // Admin Dashboard
-            }
-            else if (user.Role == "Employee")
-            {
-                return RedirectToPage("/CoffeeMachines"); // Employee Dashboard
-            }
-
-            return RedirectToPage("/Login"); // Default fallback
+            return RedirectToPage("/Index");
         }
     }
 }
