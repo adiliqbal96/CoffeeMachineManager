@@ -42,11 +42,11 @@ namespace CoffeeMachineManager.Pages
             // Redirect based on role
             if (user.Role == "Admin")
             {
-                return RedirectToPage("/Index"); // Admin Dashboard
+                return RedirectToPage("/CoffeeMachines"); // Admin Dashboard
             }
             else if (user.Role == "Employee")
             {
-                return RedirectToPage("/CoffeeMachines"); // Employee Dashboard
+                return RedirectToPage("/Feedback"); // Employee Dashboard
             }
 
             return RedirectToPage("/Login"); // Default fallback

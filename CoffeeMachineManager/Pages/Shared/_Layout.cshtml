@@ -59,27 +59,17 @@
                     <ul class="navbar-nav ms-auto">
                         @if (Context.Session.GetString("UserRole") == "Admin")
                         {
-                            <!-- Admin Navigation -->
-                            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/User/Create">Create User</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/User/Create">Manage Users</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Feedback">Feedback</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
                         }
                         else if (Context.Session.GetString("UserRole") == "Employee")
                         {
-                            <!-- Employee Navigation -->
                             <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Feedback">Feedback</a></li>
                         }
-                        else
-                        {
-                            <!-- Unauthenticated Navigation -->
-                            <li class="nav-item"><a class="nav-link" href="/Login">Login</a></li>
-                        }
 
-                        <!-- Logout button -->
                         @if (!string.IsNullOrEmpty(Context.Session.GetString("UserRole")))
                         {
                             <li class="nav-item">

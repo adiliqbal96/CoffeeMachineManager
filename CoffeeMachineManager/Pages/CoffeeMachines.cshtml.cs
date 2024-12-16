@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CoffeeMachineManager.Pages
 {
-    [Authorize]
+    
     public class CoffeeMachinesModel : PageModel
     {
         private readonly ApplicationDbContext _context;
