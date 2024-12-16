@@ -1,5 +1,7 @@
 using CoffeeMachineManager.Data;
 using CoffeeMachineManager.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,48 +10,69 @@ namespace CoffeeMachineManager.Pages
     public class LoginModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly SignInManager<Models.User> _signInManager;
+        private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(ApplicationDbContext context)
+        public LoginModel(ApplicationDbContext context,
+            SignInManager<Models.User> signInManager, ILogger<LoginModel> logger)
         {
             _context = context;
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
         [BindProperty]
-        public string Email { get; set; }
-        [BindProperty]
-        public string Password { get; set; }
+        public Models.User Input { get; set; }
 
-        public IActionResult OnPost()
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        [TempData]
+        public string ErrorMessage { get; set; }
+
+        public async Task OnGetAsync(string returnUrl = null)
         {
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(ErrorMessage))
             {
-                ModelState.AddModelError(string.Empty, "Email and Password are required.");
-                return Page();
+                ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+            returnUrl ??= Url.Content("~/");
 
-            if (user == null)
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            ReturnUrl = returnUrl;
+        }
+
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid email or password.");
-                return Page();
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
             }
 
-            // Set session variables
-            HttpContext.Session.SetString("UserRole", user.Role);
-            HttpContext.Session.SetString("UserEmail", user.Email);
-
-            // Redirect based on role
-            if (user.Role == "Admin")
-            {
-                return RedirectToPage("/Index"); // Admin Dashboard
-            }
-            else if (user.Role == "Employee")
-            {
-                return RedirectToPage("/CoffeeMachines"); // Employee Dashboard
-            }
-
-            return RedirectToPage("/Login"); // Default fallback
+            // If we got this far, something failed, redisplay form
+            return Page();
         }
     }
 }
