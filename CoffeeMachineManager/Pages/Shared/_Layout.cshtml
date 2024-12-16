@@ -62,8 +62,8 @@
                             @if (Context.Session.GetString("UserRole") == "Admin")
                             {
                                 <!-- Admin sees all options -->
-                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
                             }
                             else if (Context.Session.GetString("UserRole") == "Employee")
