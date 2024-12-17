@@ -1,6 +1,5 @@
 ﻿@page
-@model CreateModel
-
+@model CoffeeMachineManager.Pages.User.CreateModel
 @{
     ViewData["Title"] = "Create User";
 }
@@ -11,16 +10,15 @@
             <h3 class="mb-0">Create User</h3>
         </div>
         <div class="card-body">
-            @* Display success message if user creation was successful *@
-            @if (TempData["Message"] != null)
+            <!-- Success Message -->
+            @if (TempData["SuccessMessage"] != null)
             {
                 <div class="alert alert-success text-center">
-                    @TempData["Message"]
+                    @TempData["SuccessMessage"]
                 </div>
             }
 
             <form method="post">
-                @* Show validation errors at the top of the form *@
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
                 <div class="mb-3">
@@ -45,20 +43,17 @@
                     <span asp-validation-for="User.Role" class="text-danger"></span>
                 </div>
 
-                @* Submit button *@
                 <div class="text-center">
                     <button type="submit" class="btn btn-warning px-4">Create</button>
                 </div>
             </form>
         </div>
         <div class="card-footer text-center">
-            @* Link to navigate back to the homepage *@
-            <a asp-page="/Index" class="btn btn-link text-decoration-none">Back to List</a>
+            <a asp-page="/User/ManageUsers" class="btn btn-link text-decoration-none">Back to List</a>
         </div>
     </div>
 </div>
 
-@* This is client-side validation *@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using CoffeeMachineManager.Data;
-using CoffeeMachineManager.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using CoffeeMachineManager.Models; // Explicitly use this namespace
 
-namespace CoffeeMachineManager.Pages
+namespace CoffeeMachineManager.Pages.User
 {
     public class CreateModel : PageModel
     {
-        private readonly CoffeeMachineManager.Data.ApplicationDbContext _context;
-        private readonly CoffeeMachineManager.Interfaces.IPasswordHasher _passwordHasher;
+        private readonly ApplicationDbContext _context;
+        private readonly Interfaces.IPasswordHasher _passwordHasher;
 
-        public CreateModel(CoffeeMachineManager.Data.ApplicationDbContext context, Interfaces.IPasswordHasher passwordHasher)
+        public CreateModel(ApplicationDbContext context, Interfaces.IPasswordHasher passwordHasher)
         {
             _context = context;
             _passwordHasher = passwordHasher;
@@ -28,9 +24,8 @@ namespace CoffeeMachineManager.Pages
         }
 
         [BindProperty]
-        public Models.User User { get; set; } = default!;
+        public CoffeeMachineManager.Models.User User { get; set; } // Explicitly specify the User class
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -38,13 +33,26 @@ namespace CoffeeMachineManager.Pages
                 return Page();
             }
 
-            User.Password = _passwordHasher.GetHash(User.Password ?? throw new NullReferenceException("User password input is null!"));
+            try
+            {
+                // Hash the password
+                User.Password = _passwordHasher.GetHash(User.Password);
 
-            _context.Users.Add(User);
-            await _context.SaveChangesAsync();
-            TempData["Message"] = "User created successfully!";
+                // Add the user to the database
+                _context.Users.Add(User);
+                await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Index"); // Needs to redirects to confirm or failure page.
+                // Success message to be shown on ManageUsers page
+                TempData["SuccessMessage"] = "User created successfully!";
+
+                // Redirect back to ManageUsers page
+                return RedirectToPage("/User/ManageUsers");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error creating user: {ex.Message}");
+                return Page();
+            }
         }
     }
 }

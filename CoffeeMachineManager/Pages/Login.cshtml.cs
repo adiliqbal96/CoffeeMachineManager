@@ -8,10 +8,12 @@ namespace CoffeeMachineManager.Pages
     public class LoginModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly Interfaces.IPasswordVerifier _passwordVerifier;
 
-        public LoginModel(ApplicationDbContext context)
+        public LoginModel(ApplicationDbContext context, Interfaces.IPasswordVerifier passwordVerifier)
         {
             _context = context;
+            _passwordVerifier = passwordVerifier;
         }
 
         [BindProperty] public string Email { get; set; }
@@ -25,9 +27,10 @@ namespace CoffeeMachineManager.Pages
                 return Page();
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
+            bool IsPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
 
-            if (user == null)
+            if (user == null || !IsPasswordCorrect)
             {
                 ModelState.AddModelError(string.Empty, "Invalid email or password.");
                 return Page();
