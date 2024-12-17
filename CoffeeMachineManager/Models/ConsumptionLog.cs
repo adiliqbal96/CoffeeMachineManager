@@ -16,6 +16,6 @@ namespace CoffeeMachineManager.Models
         [Required]
         public int CoffeeUsed { get; set; } // Coffee consumption in grams
 
-        public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     }
 }

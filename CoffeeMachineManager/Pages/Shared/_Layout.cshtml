@@ -4,48 +4,118 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CoffeeMachineManager</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" /> <!-- Tilføjet brugerdefineret styles css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #5C5300;
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+
+            .nav-link:hover {
+                color: #f7c08a !important; /* Light orange hover effect */
+            }
+
+        .hero-section {
+            flex: 1;
+            background-color: #f8f9fa;
+            color: #343a40;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        footer {
+            background-color: #5C5300;
+            color: #ffffff;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .footer-section {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">CoffeeMachineManager</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <!-- Navbar: Hidden on the Login Page -->
+    @if (!Context.Request.Path.Value.Contains("Login", StringComparison.OrdinalIgnoreCase))
+    {
+        <header>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="/Index">CoffeeMachineManager</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            @if (Context.Session.GetString("UserRole") == "Admin")
+                            {
+                                <!-- Admin sees all options -->
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                                <li class="nav-item"><a class="nav-link" href="/User/ManageUsers">Manage Users</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Manage Coffee Machines</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
+                            }
+                            else if (Context.Session.GetString("UserRole") == "Employee")
+                            {
+                                <!-- Employees see restricted options -->
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                                <li class="nav-item"><a class="nav-link" href="/CoffeeMachines">Coffee Machines</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Reports">Reports</a></li>
+                            }
+
+                            <!-- Logout Button -->
+                            @if (!string.IsNullOrEmpty(Context.Session.GetString("UserRole")))
+                            {
+                                <li class="nav-item">
+                                    <form method="post" asp-page="/Logout" style="display: inline;">
+                                        <button type="submit" class="btn btn-link nav-link" style="text-decoration: none; color: #ffffff;">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            </nav>
+        </header>
+    }
+
+    <!-- Main Content -->
+    <div class="hero-section">
+        @RenderBody()
+        @RenderSection("Scripts", required: false)
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- Footer -->
+    <footer class="text-white">
         <div class="container">
-            &copy; 2024 - CoffeeMachineManager - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-6 footer-section">
+                    <h6>Contact Us</h6>
+                    <p>Email: support@coffeemanager.com</p>
+                    <p>Phone: +22873422</p>
+                </div>
+                <div class="col-md-6 footer-section">
+                    <h6>Follow Us</h6>
+                    <p>Stay updated with the latest news and updates!</p>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

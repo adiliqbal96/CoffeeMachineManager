@@ -1,0 +1,70 @@
+﻿@page
+@model CoffeeMachineManager.Pages.ReportsModel
+
+<h1>Reports & Logs</h1>
+<p>Here you can view detailed reports and add consumption logs for coffee machine usage.</p>
+
+<!-- Display Existing Logs -->
+<div class="container mt-4">
+    <h3>Existing Consumption Logs</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Coffee Used (grams)</th>
+                <th>CreatedOn</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ConsumptionLogs.Any())
+            {
+                foreach (var log in Model.ConsumptionLogs)
+                {
+                    <tr>
+                        <td>@log.CoffeeMachine.Location</td>
+                        <td>@log.CoffeeMachine.Type</td>
+                        <td>@log.CoffeeUsed</td>
+                        <td>@log.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">No logs available.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Add New Log -->
+<div class="container mt-4">
+    <h3>Add Consumption Log</h3>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+        <div class="mb-3">
+            <label for="CoffeeMachineId" class="form-label">Coffee Machine</label>
+            <select id="CoffeeMachineId" name="CoffeeMachineId" class="form-select" required>
+                <option value="" disabled selected>Select a coffee machine</option>
+                @foreach (var machine in Model.CoffeeMachines)
+                {
+                    <option value="@machine.Id">@machine.Location - @machine.Type</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="CoffeeUsed" class="form-label">Coffee Used (grams)</label>
+            <input type="number" id="CoffeeUsed" name="CoffeeUsed" class="form-control" required min="1" />
+        </div>
+
+        <button type="submit" class="btn btn-warning">Add Log</button>
+    </form>
+</div>
+
+<div class="mt-3">
+    <a asp-page="/Index" class="btn btn-secondary">Back to Home</a>
+</div>

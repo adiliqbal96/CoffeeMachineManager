@@ -1,0 +1,56 @@
+﻿@page
+@model CoffeeMachinesModel
+
+<h1>Manage Coffee Machines</h1>
+
+<div class="container mt-4">
+    <!-- Display Coffee Machines -->
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.CoffeeMachines.Any())
+                    {
+                        foreach (var machine in Model.CoffeeMachines)
+                        {
+                            <tr>
+                                <td>@machine.Location</td>
+                                <td>@machine.Type</td>
+                                <td>@machine.Status</td>
+                                <td>
+                                    <a asp-page="/EditCoffeeMachines" asp-route-id="@machine.Id" class="btn btn-sm btn-warning">Edit</a>
+                                    <a asp-page="/DeleteCoffeeMachines" asp-route-id="@machine.Id" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">No coffee machines available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add Coffee Machine -->
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <a asp-page="/CreateCoffeeMachine" class="btn btn-warning px-4">Add Coffee Machine</a>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="/Index" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>

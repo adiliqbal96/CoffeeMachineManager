@@ -1,20 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 
 namespace CoffeeMachineManager.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        public string UserRole { get; set; }
 
         public void OnGet()
         {
-            // Any necessary initialization logic for the homepage
+            // Retrieve the user role from the session
+            UserRole = HttpContext.Session.GetString("UserRole");
         }
     }
 }
