@@ -2,7 +2,7 @@
 
 namespace CoffeeMachineManager.PasswordHashing
 {
-    public class PasswordVerifier
+    public class PasswordVerifier : IPasswordVerifier
     {
         public IPasswordHasher Hasher { get; set; }
 
