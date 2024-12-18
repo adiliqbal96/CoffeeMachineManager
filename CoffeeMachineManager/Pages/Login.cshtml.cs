@@ -17,7 +17,6 @@ namespace CoffeeMachineManager.Pages
         }
 
         [BindProperty] public new Models.User User { get; set; }
-        [BindProperty] public string Password { get; set; }
 
         public IActionResult OnPost()
         {
