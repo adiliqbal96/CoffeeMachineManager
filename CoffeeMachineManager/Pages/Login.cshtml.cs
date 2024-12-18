@@ -16,18 +16,18 @@ namespace CoffeeMachineManager.Pages
             _passwordVerifier = passwordVerifier;
         }
 
-        [BindProperty] public string Email { get; set; }
+        [BindProperty] public new Models.User User { get; set; }
         [BindProperty] public string Password { get; set; }
 
         public IActionResult OnPost()
         {
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(User.Email) || string.IsNullOrEmpty(User.Password))
             {
                 ModelState.AddModelError(string.Empty, "Email and Password are required.");
                 return Page();
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
+            var user = _context.Users.FirstOrDefault(u => u.Email == User.Email);
 
             if (user == null)
             {
@@ -36,7 +36,7 @@ namespace CoffeeMachineManager.Pages
             }
             else
             {
-                bool isPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
+                bool isPasswordCorrect = _passwordVerifier.VerifyHash(User.Password, user.Password);
                 if (!isPasswordCorrect)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid email or password.");
