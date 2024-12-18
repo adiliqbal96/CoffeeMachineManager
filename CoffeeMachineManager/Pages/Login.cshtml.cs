@@ -36,8 +36,8 @@ namespace CoffeeMachineManager.Pages
             }
             else
             {
-                bool IsPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
-                if (!IsPasswordCorrect)
+                bool isPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
+                if (!isPasswordCorrect)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid email or password.");
                     return Page();
