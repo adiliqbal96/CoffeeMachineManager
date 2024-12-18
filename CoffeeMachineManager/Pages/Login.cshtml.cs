@@ -28,12 +28,20 @@ namespace CoffeeMachineManager.Pages
             }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == Email);
-            bool IsPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
 
-            if (user == null || !IsPasswordCorrect)
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid email or password.");
                 return Page();
+            }
+            else
+            {
+                bool IsPasswordCorrect = _passwordVerifier.VerifyHash(Password, user.Password);
+                if (!IsPasswordCorrect)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid email or password.");
+                    return Page();
+                }
             }
 
             HttpContext.Session.SetString("UserRole", user.Role);
